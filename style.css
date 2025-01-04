@@ -1,0 +1,26 @@
+.form-control{
+    border: none;
+    background-color: #000;
+    color: aliceblue;
+}
+.form-control:focus{
+    background-color: #000;
+    color: aliceblue;
+}
+.price{
+    display: flex;
+    gap: 5px;
+}
+.price input{
+    flex: 1;
+    border: none;
+    background-color: #000;
+    color: aliceblue;
+}
+.form-text::before {
+    content: "Total: ";
+}
+small{
+    color: aliceblue;
+    border: none;
+}
