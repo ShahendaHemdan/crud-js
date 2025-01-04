@@ -3,7 +3,7 @@ let price=document.getElementById("price");
 let Tax=document.getElementById("Tax");
 let total=document.getElementById("total");
 let category=document.getElementById("category");
-let count=document.getElementById("count") ;
+let count = document.getElementById("countInput");
 let search=document.getElementById("search");
 let submit=document.getElementById("submit");
 let tmp;
@@ -30,40 +30,54 @@ let products;
         }else{
             products=JSON.parse(localStorage.getItem("products"));
         }
-submit.addEventListener("click",function(){
-    if(title.value!="" && price.value!="" && Tax.value!="" && category.value!="" ){
-        let product={
-            title:title.value,
-            price:price.value,
-            Tax:Tax.value,
-            total:total.innerHTML,
-            category:category.value,
-            count:count.value,
+
+
+
+
+
+
+
+submit.addEventListener("click", function() {
+    if (title.value !== "" && price.value !== "" && category.value !== "") {
+        let product = {
+            title: title.value,
+            price: price.value,
+            Tax: Tax.value,
+            total: total.innerHTML,
+            category: category.value,
+            count: parseInt(count.value) // Convert to integer
+        };
+
+        console.log("Count Value: ", product.count); // Log the value
+
+        // Validate count
+        if (isNaN(product.count) || product.count <= 0) {
+            alert("Count must be a positive number");
+            return;
         }
-        if(mood=='create'){
-        
-        if(product.count>1){
-            for(let i=0;i<product.count;i++){
+
+        if (mood === 'create') {
+            if (product.count > 1) {
+                for (let i = 0; i < product.count; i++) {
+                    products.push({...product}); // Use spread operator
+                }
+            } else {
                 products.push(product);
             }
-        }else{
-            
-            products.push(product);
+        } else {
+            products[tmp] = product; // Update the existing product
+            mood = 'create';
+            submit.innerHTML = "Create";
+            count.style.display = "block"; // Show count input
         }
-        }else{
-            products[tmp]=product;
-            mood='create';
-            submit.innerHTML="Create";
-            count.style.display="block";
-        }
-        localStorage.setItem("products",JSON.stringify(products));
+
+        localStorage.setItem("products", JSON.stringify(products));
         clearAll();
-        showData()
-    }else{
+        showData();
+    } else {
         alert("Please fill all the fields");
     }
-})
-
+});
 function clearAll(){
     title.value="";
     price.value="";

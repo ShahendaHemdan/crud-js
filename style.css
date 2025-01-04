@@ -24,3 +24,10 @@ small{
     color: aliceblue;
     border: none;
 }
+
+
+.form-control::placeholder {
+    color: aliceblue;
+    opacity: 1; 
+}
+
