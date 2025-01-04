@@ -27,7 +27,7 @@ small{
 
 
 .form-control::placeholder {
-    color: aliceblue;
+    color: rgb(196, 207, 218);
     opacity: 1; 
 }
 
